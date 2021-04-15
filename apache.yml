@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+  tasks:
+     - name: Install httpd
+       yum:
+         name: httpd
+         state: start
+     - name: copy index.html
+       copy:
+         src: /home/ec2-user/index.html
+         dest: /var/lib/www/index.html
+     - name: restart httpd services
+       service:
+         name: httpd
+         state: started       
